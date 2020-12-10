@@ -9,27 +9,27 @@ import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 
 function App() {
-  const[{},dispatch]=useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
-    auth.onAuthStateChanged(authUser=>{
-      console.log('the user is ',authUser);
-      if(authUser){
+    auth.onAuthStateChanged((authUser) => {
+      console.log("the user is ", authUser);
+      if (authUser) {
         //the user is logged in
-          dispatch({
-            type:'SET_USER',
-            user:authUser
-          })
-        
-      }else{
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
+      } else {
         //the user is logged out
         dispatch({
-          type:'SET_USER',
-            user:null
-        })
+          type: "SET_USER",
+          user: null,
+        });
       }
-    })
-  }, [])
+    });
+  }, []);
+
   return (
     <Router>
       <div className="app">
